@@ -12,10 +12,9 @@ class AppDrawer extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/logo.jpg',
-                  height: 50, // adjust the height as needed
+                  height: 50,
                 ),
-                SizedBox(
-                    width: 10), // add some spacing between the logo and text
+                SizedBox(width: 10),
                 Text(
                   'The Imperiled',
                   style: TextStyle(fontSize: 18),
