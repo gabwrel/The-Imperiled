@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout/immutable_widget.dart';
 import 'package:flutter_layout/text_layout.dart';
+import 'package:flutter_layout/app-drawer.dart';
 
 class BasicScreen extends StatelessWidget {
   @override
@@ -10,8 +11,10 @@ class BasicScreen extends StatelessWidget {
       backgroundColor: Color(0xFF191c44),
       appBar: AppBar(
         backgroundColor: Color(0xFFff66c4),
-        title: Text('The Imperiled', 
-        style: TextStyle(fontFamily: 'Montserrat'),),
+        title: Text(
+          'The Imperiled',
+          style: TextStyle(fontFamily: 'Montserrat'),
+        ),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -26,14 +29,7 @@ class BasicScreen extends StatelessWidget {
           TextLayout(),
         ],
       ),
-      drawer: Drawer(
-        child: Container(
-          color: Color(0xFFc1FF72),
-          child: Center(
-            child: Text("I'm a Drawer!"),
-          ),
-        ),
-      ),
+      drawer: AppDrawer(),
     );
   }
 }
