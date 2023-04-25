@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout/about_screen.dart';
+import 'basic_screen.dart';
+import 'home.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -30,12 +33,18 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
+            leading: Icon(Icons.person),
+            title: Text('About'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutScreen()),
+              );
+            },
           ),
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Profile'),
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
           ),
           ListTile(
             leading: Icon(Icons.help),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'app_drawer.dart';
+import 'basic_screen.dart';
 
-class TextLayout extends StatelessWidget {
+class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
