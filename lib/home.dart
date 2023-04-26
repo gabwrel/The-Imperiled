@@ -11,32 +11,31 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF191c44),
+      appBar: 
+        AppBar(
+          backgroundColor: Color(0xFFff66c4),
+          title: Text(
+          'Welcome!',
+          style: TextStyle(fontFamily: 'Montserrat'),
+            ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Icon(Icons.edit),
+              ),
+            ],
+          ),
       body: SafeArea(
         child: Column(
-          children: [
-            Stack(
               children: [
                 Image.asset(
                   'assets/logo.jpg',
-                  height: 60,
-                  width: double.infinity,
+                  height: 200,
+                  width: 200,
                   fit: BoxFit.cover,
                 ),
-                AppBar(
-                  backgroundColor: Color(0xFFff66c4),
-                  title: Text(
-                    'The Imperiled',
-                    style: TextStyle(fontFamily: 'Montserrat'),
-                  ),
-                  actions: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Icon(Icons.edit),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+
+              
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
@@ -54,9 +53,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisSpacing: 10,
                     padding: EdgeInsets.all(10),
                     children: [
-                      _buildCollection('assets/images/Collection 1.jpg', 'Collection 1', '5 items'),
-                      _buildCollection('assets/images/Collection 2.jpg', 'Collection 2', '10 items'),
-                      _buildCollection('assets/images/Collection 3.jpg', 'Collection 3', '15 items'),
+                      _buildCollection('assets/images/collection1.jpg', 'Collection 1', '5 items'),
+                      _buildCollection('assets/images/collection2.jpg', 'Collection 2', '10 items'),
+                      _buildCollection('assets/images/collection3.jpg', 'Collection 3', '15 items'),
+                      _buildCollection('assets/images/collection3.jpg', 'Collection 4', '25 items'),
                     ],
                   ),
                 ),

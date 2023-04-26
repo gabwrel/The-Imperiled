@@ -26,11 +26,22 @@ class AppDrawer extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       color: Color(0xFF191c44),
+                      
                     ),
                   ),
                 ],
               ),
             ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
+            },
           ),
           ListTile(
             leading: Icon(Icons.person),
