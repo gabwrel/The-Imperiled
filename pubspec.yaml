@@ -40,6 +40,7 @@ flutter:
     - family: LeckerliOne
       fonts:
         - asset: assets/Montserrat.ttf
+        
   assets:
     - assets/logo.jpg
     - assets/images/
