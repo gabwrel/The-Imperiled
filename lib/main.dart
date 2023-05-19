@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout/basic_screen.dart';
 import 'package:flutter_layout/home.dart';
+import 'package:flutter_layout/details_screen.dart';
 
 void main() => runApp(StaticApp());
 

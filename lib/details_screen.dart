@@ -6,9 +6,9 @@ class DetailsScreen extends StatelessWidget {
   final String details;
 
   DetailsScreen({
-    required this.imageAssetPath,
-    required this.butterfly,
-    required this.details,
+    this.imageAssetPath,
+    this.butterfly,
+    this.details,
   });
 
   @override
@@ -90,7 +90,4 @@ class DetailsScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-class required {
 }
