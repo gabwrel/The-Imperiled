@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "30591656875",
+    "project_id": "the-imperiled-app",
+    "storage_bucket": "the-imperiled-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30591656875:android:4b44aa30e9fb5fe0ca28ee",
+        "android_client_info": {
+          "package_name": "cict.mobileappdev.theimperiledapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30591656875-0buucs0o9q89sndebeccuak1jq1e6o74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZcy-i_2SY8Zl9EvpRuT8JXguf07sey8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30591656875-0buucs0o9q89sndebeccuak1jq1e6o74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
