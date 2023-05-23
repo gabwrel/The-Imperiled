@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout/app_drawer.dart';
 import 'package:flutter_layout/details_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,6 +11,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String? imageURL;
+  String details = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,480 +63,236 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-        padding: EdgeInsets.all(10.0),
-        children: <Widget>[
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                padding: EdgeInsets.all(10.0),
+                children: <Widget>[
+                  //Butterfly 1
+                  GestureDetector(
+                    onTap: () async {
+                      // Retrieve the image URL from Firebase Storage
+                      imageURL = await firebase_storage.FirebaseStorage.instance
+                          .ref('Karner blue butterfly (Lycaeides melissa samuelis).jpg')
+                          .getDownloadURL();
 
-          
-          //BUTTERFLY 1: Karner Blue Butterfly
-        GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly1.jpg',
-          butterfly: 'Karner Blue Butterfly',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly1.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text(
-          'Karner Blue',
-          style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold,),
-        ),
-        SizedBox(height: 5.0),
-      Text(
-        '(Lycaeides melissa samuelis)',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 13.0,
-          fontStyle: FontStyle.italic,
-        ),
-      )
-      ],
-    ),
-  ),
-),
+                      // Retrieve the 'details' from Firestore
+                      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+                          .collection('Endangered Butterflies')
+                          .doc('cA2q63hOLQiTO9HluCnu')
+                          .get();
 
+                 if (snapshot.exists) {
+                  // If the document exists, extract the 'details' field
+                  var data = snapshot.data() as Map<String, dynamic>;
+                  if (data != null && data.containsKey('details')) {
+                    details = data['details'] as String;
+                  } else {
+                    details = 'Details not available';
+                  }
+                } else {
+                  // Handle the case when the document does not exist
+                  details = 'Details not available';
+                }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                            imageURL: imageURL!,
+                            butterfly: 'Karner Blue Butterfly',
+                            details: details,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      color: Color(0xFFff66c4),
+                      elevation: 10.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.network(
+                            imageURL ?? '',
+                            height: 100,
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'Karner Blue',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          Text(
+                            '(Lycaeides melissa samuelis)',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 13.0,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
 
-//BUTTERFLY 2: Callippe Silverspot Butterfly
- GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly1.jpg',
-          butterfly: 'Callippe Silverspot Butterfly',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly2.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text(
-          'Callippe Silverspot',
-          style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold,),
-        ),
-        SizedBox(height: 5.0),
-      Text(
-        '(Speyeria callippe callippe)',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 13.0,
-          fontStyle: FontStyle.italic,
-        ),
-      )
-      ],
-    ),
-  ),
-),
+                //Butterfly 2
+                   GestureDetector(
+                    onTap: () async {
+                      // Retrieve the image URL from Firebase Storage
+                      imageURL = await firebase_storage.FirebaseStorage.instance
+                          .ref('Callippe silverspot butterfly (Speyeria callippe callippe).jpg')
+                          .getDownloadURL();
 
+                      // Retrieve the 'details' from Firestore
+                      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+                          .collection('Endangered Butterflies')
+                          .doc('WBHRYJOZub6sKoi7tgRH')
+                          .get();
 
-//BUTTEFLY 3: Bartram\'s Hairstreak Butterfly
-  GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly1.jpg',
-          butterfly: 'Bartram\'s Hairstreak Butterfly',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly3.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text('Bartram\'s Hairstreak',
-  style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold),
-),
-        SizedBox(height: 5.0),
-      Text(
-        '(Strymon acis bartrami)',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 13.0,
-          fontStyle: FontStyle.italic,
-        ),
-      )
-      ],
-    ),
-  ),
-),
+                 if (snapshot.exists) {
+                  // If the document exists, extract the 'details' field
+                  var data = snapshot.data() as Map<String, dynamic>;
+                  if (data != null && data.containsKey('details')) {
+                    details = data['details'] as String;
+                  } else {
+                    details = 'Details not available';
+                  }
+                } else {
+                  // Handle the case when the document does not exist
+                  details = 'Details not available';
+                }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                            imageURL: imageURL!,
+                            butterfly: 'Callippe Silverspot Butterfly',
+                            details: details,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      color: Color(0xFFff66c4),
+                      elevation: 10.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.network(
+                            imageURL ?? '',
+                            height: 100,
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'Callippe Silverspot Butterfly',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          Text(
+                            '(Speyeria callippe callippe)',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 13.0,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+        //Butterfly 3
+                   GestureDetector(
+                    onTap: () async {
+                      // Retrieve the image URL from Firebase Storage
+                      imageURL = await firebase_storage.FirebaseStorage.instance
+                          .ref('Saint Francis\' Satyr (Neonympha mitchellii francisci).jpg')
+                          .getDownloadURL();
 
+                      // Retrieve the 'details' from Firestore
+                      DocumentSnapshot snapshot = await FirebaseFirestore.instance
+                          .collection('Endangered Butterflies')
+                          .doc('mMshraWDyJL9Ffn6EvF5')
+                          .get();
 
-//BUTTERFLY 4: Saint Francis' Satyr
-GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly4.jpg',
-          butterfly: 'Saint Francis\' Satyr',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly3.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text(
-          'Saint Francis\' Satyr',
-          style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 5.0),
-        Text(
-          '(Neonympha mitchellii francisci)',
-          style: TextStyle(
-            fontFamily: 'Montserrat',
-            fontSize: 13.0,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-      ],
-    ),
-  ),
-),
+                 if (snapshot.exists) {
+                  // If the document exists, extract the 'details' field
+                  var data = snapshot.data() as Map<String, dynamic>;
+                  if (data != null && data.containsKey('details')) {
+                    details = data['details'] as String;
+                  } else {
+                    details = 'Details not available';
+                  }
+                } else {
+                  // Handle the case when the document does not exist
+                  details = 'Details not available';
+                }
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailsScreen(
+                            imageURL: imageURL!,
+                            butterfly: 'Saint Francis\' Satyr Butterfly',
+                            details: details,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      color: Color(0xFFff66c4),
+                      elevation: 10.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Image.network(
+                            imageURL ?? '',
+                            height: 100,
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'Saint Francis\' Satyr',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          Text(
+                            '(Neonympha mitchellii francisci)',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontSize: 13.0,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
 
-//BUTTERFLY 5: San Bruno elfin butterfly
-GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly5.jpg',
-          butterfly: 'San Bruno Elfin Butterfly',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly5.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text('San Bruno Elfin',
-  style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold),
-),
-        SizedBox(height: 5.0),
-      Text(
-        '(Callophrys mossii bayensis)',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 13.0,
-          fontStyle: FontStyle.italic,
-        ),
-      )
-      ],
-    ),
-  ),
-),
-
-
-//BUTTERFLY 6: Miami Blue
-GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly6.jpg',
-          butterfly: 'Miami Blue Butterfly',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly6.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text('Miami Blue',
-  style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold),
-),
-        SizedBox(height: 5.0),
-      Text(
-        '(Cyclargus thomasi bethunebakeri)',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 13.0,
-          fontStyle: FontStyle.italic,
-        ),
-      )
-      ],
-    ),
-  ),
-),
-
-//BUTTERFLY 7: Schaus swallowtail
-GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly7.jpg',
-          butterfly: 'Schaus swallowtail',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly7.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text('Schaus swallowtail',
-  style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold),
-),
-        SizedBox(height: 5.0),
-      Text(
-        '(Heraclides aristodemus ponceanus)',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 13.0,
-          fontStyle: FontStyle.italic,
-        ),
-      )
-      ],
-    ),
-  ),
-),
-
-
-//BUTTERFLY 8: Palos Verdes Blue Butterfly
-GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly8.jpg',
-          butterfly: 'Palos Verdes Blue Butterfly',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly8.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text('Palos Verdes Blue',
-  style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold),
-),
-        SizedBox(height: 5.0),
-      Text(
-        '(Glaucopsyche lygdamus\n palosverdesensis)',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 13.0,
-          fontStyle: FontStyle.italic,
-        ),
-      )
-      ],
-    ),
-  ),
-),
-
-
-//BUTTERFLY 9: Florida Leafwing Butterfly
-GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly9.jpg',
-          butterfly: 'Florida Leafwing Butterfly',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly9.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text('Florida Leafwing',
-  style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold),
-),
-        SizedBox(height: 5.0),
-      Text(
-        '(Anaea troglodyta floridalis)',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 13.0,
-          fontStyle: FontStyle.italic,
-        ),
-      )
-      ],
-    ),
-  ),
-),
-
-
-//BUTTERFLY 10: Uncompahgre Fritillary Butterfly
-GestureDetector(
-  onTap: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => DetailsScreen(
-          imageAssetPath: 'assets/butterfly10.jpg',
-          butterfly: 'Uncompahgre Fritillary Butterfly',
-          details: 'Federal Status: Endangered\nHost plant: Wild lupine (Lupinus perennis)\nHistorical Range: Illinois, Indiana, Massachusetts, Michigan, Minnesota, New Hampshire, New York, Ohio, Pennsylvania, Wisconsin.\n\nHistory and Description: The Karner blue butterfly was first described more than a century ago in Karner, New York. It is a small butterfly, with a wingspan of about one inch. The male\'s wings are distinctively marked with a silvery or dark blue color. The female is grayish brown, especially on the outer portions of the wings, to blue on the topside, with irregular bands of orange crescents inside the narrow black border. (ECOS- Environmental Conservation Online System)\n\nWhile adult Karner blues feed on a variety of plants, wild lupine is the only known food plant for their larvae. Without wild lupine the cycle of life for this butterfly would be broken. Lupines are adapted to particular environmental conditions. The plants required by the larvae of the Karner blue, are found in savanna, barrens, and dune habitats which were once quite extensive. However, like many other places the habitats of the Karner blue have been subject to extensive development with a resulting decline in the butterfly.',
-        ),
-      ),
-    );
-  },
-  child: Card(
-    color: Color(0xFFff66c4),
-    elevation: 10.0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/butterfly10.jpg',
-          height: 100,
-        ),
-        SizedBox(height: 20),
-        Text('Uncompahgre Fritillary',
-  style: TextStyle(fontFamily: 'Montserrat', fontSize: 16, fontWeight: FontWeight.bold),
-),
-        SizedBox(height: 5.0),
-      Text(
-        '(Boloria acrocnema)',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 13.0,
-          fontStyle: FontStyle.italic,
-        ),
-      )
-      ],
-    ),
-  ),
-),
-        
-        
-        ]
-                  )
-                ),
-              ],
+                ],
+              ),
             ),
+          ],
         ),
+      ),
       drawer: AppDrawer(),
     );
-  }}
+  }
+}
