@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
-  final String imageAssetPath;
+  final String imageURL;
   final String butterfly;
   final String details;
 
   DetailsScreen({
-    this.imageAssetPath,
-    this.butterfly,
-    this.details,
+    required this.imageURL,
+    required this.butterfly,
+    required this.details,
   });
 
   @override
@@ -31,7 +31,7 @@ class DetailsScreen extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(imageAssetPath),
+                    image: NetworkImage(imageURL),
                     fit: BoxFit.cover,
                   ),
                 ),
