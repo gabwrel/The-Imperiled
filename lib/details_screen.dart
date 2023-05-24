@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class DetailsScreen extends StatelessWidget {
   final String imageURL;
-  final String butterfly;
+  final String name;
   final String details;
 
   DetailsScreen({
     required this.imageURL,
-    required this.butterfly,
+    required this.name,
     required this.details,
   });
 
@@ -53,7 +53,7 @@ class DetailsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      butterfly,
+                      name,
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 28.0,

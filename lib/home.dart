@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'Karner Blue Butterfly',
+                            name: 'Karner Blue Butterfly',
                             details: details,
                           ),
                         ),
@@ -175,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'Callippe Silverspot Butterfly',
+                            name: 'Callippe Silverspot Butterfly',
                             details: details,
                           ),
                         ),
@@ -249,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'Saint Francis\' Satyr Butterfly',
+                            name: 'Saint Francis\' Satyr Butterfly',
                             details: details,
                           ),
                         ),
@@ -322,7 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'San Bruno Elfin Butterfly',
+                            name: 'San Bruno Elfin Butterfly',
                             details: details,
                           ),
                         ),
@@ -395,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'Miami Blue Butterfly',
+                            name: 'Miami Blue Butterfly',
                             details: details,
                           ),
                         ),
@@ -469,7 +469,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'Schaus swallowtail Butterfly',
+                            name: 'Schaus swallowtail Butterfly',
                             details: details,
                           ),
                         ),
@@ -543,7 +543,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'Palos Verdes Blue Butterfly',
+                            name: 'Palos Verdes Blue Butterfly',
                             details: details,
                           ),
                         ),
@@ -617,7 +617,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'Florida Leafwing Butterfly',
+                            name: 'Florida Leafwing Butterfly',
                             details: details,
                           ),
                         ),
@@ -691,7 +691,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'Uncompahgre Fritillary Butterfly',
+                            name: 'Uncompahgre Fritillary Butterfly',
                             details: details,
                           ),
                         ),
@@ -764,7 +764,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         MaterialPageRoute(
                           builder: (context) => DetailsScreen(
                             imageURL: imageURL!,
-                            butterfly: 'Bartram\'s Hairstreak Butterfly',
+                            name: 'Bartram\'s Hairstreak Butterfly',
                             details: details,
                           ),
                         ),
