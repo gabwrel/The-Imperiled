@@ -27,9 +27,40 @@ class AboutScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'The Imperiled app aims to provide information about some of the endangered species of butterflies. Realizing this and altering our routines is critical because these changes will eventually have an effect on us as well. All of our native creatures, including butterflies, which are in decline due to human activity, deserve a place in this world. It is important to keep in mind that the planet belongs to all of us, and when we alter fundamental principles that have developed over millennia, such as how plants are pollinated, we are interfering in a field about which we have little knowledge.',
+              'About the App',
               textAlign: TextAlign.center,
-              style: TextStyle(fontFamily: 'Montserrat', fontSize: 14),
+              style: TextStyle(fontFamily: 'Montserrat', fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                '''
+                Welcome to our mobile app dedicated to raising awareness about endangered butterflies and moths. There are more than 20 butterflies and moths listed as endangered by the U.S. Fish and Wildlife Service!
+
+                The main reason for these butterflies being placed under the Endangered Species Act is mainly due to loss of habitat (agriculture, commercial, residential). However, other reasons include: poor land management practices, excessive use of pesticides and herbicides, and loss of the butterfly's host plant that is necessary for its growth and development.
+
+                If faced with the risk of extinction, any species can be put under the protection of the Endangered Species Act (ESA). They are placed either as "threatened" and "endangered". An “endangered” species is one that is in danger of extinction throughout all or a significant portion of its range. A “threatened” species is one that could become endangered in the near future.
+
+                The U.S. Fish and Wildlife Service received a petition to list the Monarch butterfly under the Endangered Species Act (ESA) on August 26, 2014. The status is currently under review and will be released by June 2019.
+
+                Note: These butterflies are all listed as "Endangered" under the Endangered Species Act. The list is not exhaustive, and the complete list can be found on the USFWS ECOS site ''',
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontFamily: 'Montserrat', fontSize: 14, color: Colors.white),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Add the action you want to perform when the button is clicked
+              },
+              child: Text(
+                'View Complete List',
+                style: TextStyle(fontFamily: 'Montserrat', fontSize: 16),
+              ),
             ),
           ),
         ],
