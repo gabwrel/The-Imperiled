@@ -17,9 +17,11 @@ class DetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF191c44),
       appBar: AppBar(
-        title: Text('Butterfly',
-            style: GoogleFonts.poppins(
-                fontWeight: FontWeight.bold, color: Colors.brown.shade50)),
+        backgroundColor: Color(0xFFff66c4),
+        title: Text(
+          'Butterfly',
+          style: TextStyle(fontFamily: 'Montserrat', fontSize: 24),
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
