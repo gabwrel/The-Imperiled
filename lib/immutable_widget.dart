@@ -11,7 +11,7 @@ class ImmutableWidget extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: Image.asset('images/logo.jpg',
       height: 200,
-      width: 200,), 
+      width: 200,),
         )
         ,],
     );

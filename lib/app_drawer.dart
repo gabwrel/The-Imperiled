@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout/about_screen.dart';
-import 'basic_screen.dart';
 import 'home.dart';
 
 class AppDrawer extends StatelessWidget {
