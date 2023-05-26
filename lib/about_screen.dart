@@ -29,7 +29,11 @@ class AboutScreen extends StatelessWidget {
             child: Text(
               'About the App',
               textAlign: TextAlign.center,
-              style: TextStyle(fontFamily: 'Montserrat', fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
           ),
           Expanded(
@@ -47,7 +51,10 @@ class AboutScreen extends StatelessWidget {
 
                 Note: These butterflies are all listed as "Endangered" under the Endangered Species Act. The list is not exhaustive, and the complete list can be found on the USFWS ECOS site ''',
                 textAlign: TextAlign.justify,
-                style: TextStyle(fontFamily: 'Montserrat', fontSize: 14, color: Colors.white),
+                style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontSize: 14,
+                    color: Colors.white),
               ),
             ),
           ),
